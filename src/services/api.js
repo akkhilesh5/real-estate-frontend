@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://realestate-backend-env.eba-npqbbq9m.ap-south-1.elasticbeanstalk.com/api",
+baseURL: "/api"
 });
 
 // Automatically attach JWT token to headers if it exists in local storage

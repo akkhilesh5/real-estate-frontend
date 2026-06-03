@@ -16,14 +16,12 @@ function PropertyDetails() {
   const navigate = useNavigate();
   const [property, setProperty] = useState(null);
   
-  // Form State for Contacting the Agent
   const [contactForm, setContactForm] = useState({ name: "", email: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
 
   useEffect(() => {
     if (!id) return;
-    
     getPropertyById(id)
       .then((response) => {
         setProperty(response.data);
@@ -77,12 +75,12 @@ function PropertyDetails() {
       </button>
 
       <div className="row g-4">
-        {/* LEFT COLUMN: VISUALS & DETAILED BLOCKS */}
+        {/* LEFT COLUMN */}
         <div className="col-lg-7">
           <img
-            src={property.propertyImage ? `/images/${property.propertyImage}` : "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1200&q=80"}
-            alt={property.propertyTitle} // ✨ FIXED: Changed back to propertyTitle
-            onError={(e) => { e.target.src = "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1200&q=80"; }}
+            src={property.propertyImage || "https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg"}
+            alt={property.propertyTitle}
+            onError={(e) => { e.target.src = "https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg"; }}
             className="img-fluid shadow-sm"
             style={{ borderRadius: "20px", height: "480px", width: "100%", objectFit: "cover" }}
           />
@@ -90,17 +88,15 @@ function PropertyDetails() {
           <div className="mt-4 p-4 card border-0 shadow-sm bg-white" style={{ borderRadius: "20px" }}>
             <h4 className="fw-bold mb-3">Description</h4>
             <p className="text-secondary" style={{ lineHeight: "1.7", whiteSpace: "pre-line" }}>
-              {/* ✨ FIXED: Changed back to property.description */}
-              {property.description || "No overview summary provided for this layout catalog item yet."}
+              {property.propertyDescription || "No overview summary provided for this listing yet."}
             </p>
           </div>
         </div>
 
-        {/* RIGHT COLUMN: CORE PROPERTY CARD CAPTURE */}
+        {/* RIGHT COLUMN */}
         <div className="col-lg-5">
           <div className="p-4 shadow-sm bg-white border" style={{ borderRadius: "20px" }}>
-            {/* ✨ FIXED: Changed back to property.propertyTitle */}
-            <h2 className="fw-bold text-dark mb-2">{property.propertyTitle}</h2>
+            <h2 className="fw-bold text-dark mb-2">{property.title}</h2>
 
             <h3 className="fw-bold mb-3" style={{ color: "#00B4A6" }}>
               ₹ {property.propertyPrice?.toLocaleString("en-IN")}
@@ -108,7 +104,6 @@ function PropertyDetails() {
 
             <p className="text-muted d-flex align-items-center gap-2">
               <FaMapMarkerAlt className="text-danger" />
-              {/* ✨ FIXED: Unpacking nested city/address parameters from your LocationDto mapping */}
               {property.location
                 ? `${property.location.address || ""}, ${property.location.city || ""}`
                 : "Location details pending update"}
@@ -116,7 +111,6 @@ function PropertyDetails() {
 
             <hr className="my-4 text-muted" />
 
-            {/* Quick Metrics Icons Badges */}
             <div className="row text-center mb-4 g-2">
               <div className="col-4 bg-light py-2 rounded-3">
                 <FaBed className="text-secondary" /> 
@@ -132,7 +126,6 @@ function PropertyDetails() {
               </div>
             </div>
 
-            {/* Specifications Details Table Sheet */}
             <table className="table table-borderless text-secondary mb-4 small">
               <tbody>
                 <tr>
@@ -156,7 +149,6 @@ function PropertyDetails() {
               </div>
             )}
 
-            {/* INTEGRATED DIRECT ENQUIRY FORM PANEL */}
             <form onSubmit={handleFormSubmit} className="mt-3 pt-3 border-top">
               <h5 className="fw-bold mb-3 text-dark fs-6">Inquire About This Property</h5>
               

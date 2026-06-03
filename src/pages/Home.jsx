@@ -130,8 +130,8 @@ function Home() {
                 <div key={property.propertyId} className="col-md-4">
                   <div className="card h-100 border-0 shadow-sm" style={{ borderRadius: "15px", overflow: "hidden" }}>
                     <img 
-                      src={`/images/${property.propertyImage}`} 
-                      alt={property.propertyTitle} 
+                       src={property.propertyImage || "https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg"}
+                       alt={property.propertyTitle} 
                       onError={(e) => { e.target.src = "/images/default-house.jpg"; }}
                       className="w-100" 
                       style={{ height: "200px", objectFit: "cover" }}
@@ -139,7 +139,7 @@ function Home() {
                     <div className="card-body p-4">
                       <h4 className="fw-bold" style={{ color: "#031B3A" }}>₹ {property.propertyPrice?.toLocaleString("en-IN")}</h4>
                       <h6 className="card-title text-truncate fw-bold mb-1">{property.propertyTitle}</h6>
-                      <p className="text-muted small mb-3"><FaMapMarkerAlt className="text-danger me-1"/>{property.location?.city || "Location Pending"}</p>
+                      <p className="text-muted small mb-3"><FaMapMarkerAlt className="text-danger me-1"/>{property.propertyStyle || "Location Pending"}</p>
                       <hr />
                       <div className="d-flex justify-content-between text-secondary small mb-3">
                         <span><FaBed /> {property.propertyBedrooms} Beds</span>

@@ -14,8 +14,7 @@ API.interceptors.request.use((config) => {
 });
 
 // 🏠 1. Fetch all properties (Matches @RequestMapping("/api/properties") + @GetMapping("/"))
-export const getAllProperties = () => API.get("/properties/");
-
+export const getAllProperties = () => API.get("/properties/?pageSize=50");
 // 🔍 2. Fetch a single property by its ID (Matches @GetMapping("/{propertyId}"))
 export const getPropertyById = (id) => API.get(`/properties/${id}`);
 
